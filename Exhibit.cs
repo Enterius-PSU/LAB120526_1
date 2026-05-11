@@ -1,4 +1,4 @@
-public class Exhibit
+internal class Exhibit
 {
     private int _id;
     private string _name;
