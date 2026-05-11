@@ -1,0 +1,14 @@
+C:\Projects\C#Projects\LAB120526\bin\Debug\net10.0\LAB120526.exe
+C:\Projects\C#Projects\LAB120526\bin\Debug\net10.0\LAB120526.deps.json
+C:\Projects\C#Projects\LAB120526\bin\Debug\net10.0\LAB120526.runtimeconfig.json
+C:\Projects\C#Projects\LAB120526\bin\Debug\net10.0\LAB120526.dll
+C:\Projects\C#Projects\LAB120526\bin\Debug\net10.0\LAB120526.pdb
+C:\Projects\C#Projects\LAB120526\obj\Debug\net10.0\LAB120526.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\C#Projects\LAB120526\obj\Debug\net10.0\LAB120526.AssemblyInfoInputs.cache
+C:\Projects\C#Projects\LAB120526\obj\Debug\net10.0\LAB120526.AssemblyInfo.cs
+C:\Projects\C#Projects\LAB120526\obj\Debug\net10.0\LAB120526.csproj.CoreCompileInputs.cache
+C:\Projects\C#Projects\LAB120526\obj\Debug\net10.0\LAB120526.dll
+C:\Projects\C#Projects\LAB120526\obj\Debug\net10.0\refint\LAB120526.dll
+C:\Projects\C#Projects\LAB120526\obj\Debug\net10.0\LAB120526.pdb
+C:\Projects\C#Projects\LAB120526\obj\Debug\net10.0\LAB120526.genruntimeconfig.cache
+C:\Projects\C#Projects\LAB120526\obj\Debug\net10.0\ref\LAB120526.dll
