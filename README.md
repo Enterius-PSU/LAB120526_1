@@ -57,5 +57,13 @@
 
 ### Тестирование
 
+<img width="692" height="698" alt="1_LAB120526" src="https://github.com/user-attachments/assets/a78e18f4-77dc-45ee-bf6f-e88677ddbab6" />
+<img width="822" height="723" alt="2" src="https://github.com/user-attachments/assets/a85f6cb1-7e22-441b-baec-c01d08dbec30" />
+<img width="858" height="672" alt="3" src="https://github.com/user-attachments/assets/9f698bba-5622-4dde-9248-697c9385f848" />
+<img width="702" height="827" alt="4" src="https://github.com/user-attachments/assets/7feaa3ca-87a5-48d2-9bb8-ea2716b1f356" />
+<img width="797" height="492" alt="5" src="https://github.com/user-attachments/assets/e3fa720a-4f86-4e40-bdf3-1c7e82f86f21" />
+
+
+
 ## 
 
