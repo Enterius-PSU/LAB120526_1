@@ -1,7 +1,6 @@
 ﻿internal class Program
 {
     private static DatabaseHelper _db;
-    private static string? _fileName;
 
     private static void Main()
     {
