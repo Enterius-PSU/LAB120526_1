@@ -1,13 +1,12 @@
-﻿internal class Program
+internal class Program
 {
     private static DatabaseHelper _db;
 
     private static void Main()
     {
-        _fileName = "exhibits.dat";
-        _db = new DatabaseHelper(_fileName);
+        string fileName = "exhibits.dat";
+        _db = new DatabaseHelper(fileName);
         bool exit = false;
-        string? choice = "";
 
         while (!exit)
         {
@@ -22,7 +21,7 @@
             Console.WriteLine("0. Выход");
             Console.Write("Выберите действие: ");
 
-            choice = Console.ReadLine();
+            string? choice = Console.ReadLine();
             switch (choice)
             {
                 case "1":
@@ -79,32 +78,15 @@
 
     private static void DeleteExhibitDialog()
     {
-        int id = 0;
-        string? input = "";
-        Console.Write("Введите ID экспоната для удаления: ");
-        input = Console.ReadLine();
-        if (int.TryParse(input, out id))
-        {
-            _db.DeleteById(id);
-        }
-        else
-        {
-            Console.WriteLine("Некорректный ID.");
-        }
+        int id = ReadInt("Введите ID экспоната для удаления: ");
+        _db.DeleteById(id);
     }
 
     private static void QueryByMaterialDialog()
     {
-        string? material = "";
-        Console.Write("Введите материал: ");
-        material = Console.ReadLine();
-        if (string.IsNullOrWhiteSpace(material))
-        {
-            Console.WriteLine("Материал не может быть пустым.");
-            return;
-        }
-
+        string material = ReadNonEmptyString("Введите материал: ");
         List<Exhibit> result = _db.GetByMaterial(material);
+
         if (result.Count == 0)
         {
             Console.WriteLine($"Экспонатов из материала '{material}' не найдено.");
@@ -123,6 +105,7 @@
     {
         int year = ReadInt("Введите год (будут показаны экспонаты созданные ПОСЛЕ этого года): ");
         List<Exhibit> result = _db.GetByYearAfter(year);
+
         if (result.Count == 0)
         {
             Console.WriteLine($"Экспонатов, созданных после {year} года, не найдено.");
@@ -145,15 +128,7 @@
 
     private static void QueryCountByArtistDialog()
     {
-        string? artist = "";
-        Console.Write("Введите имя автора: ");
-        artist = Console.ReadLine();
-        if (string.IsNullOrWhiteSpace(artist))
-        {
-            Console.WriteLine("Имя автора не может быть пустым.");
-            return;
-        }
-
+        string artist = ReadNonEmptyString("Введите имя автора: ");
         int count = _db.GetCountByArtist(artist);
         Console.WriteLine($"Количество экспонатов автора '{artist}': {count}");
     }
@@ -161,53 +136,43 @@
     private static int ReadInt(string prompt, int min = int.MinValue, int max = int.MaxValue)
     {
         int value = 0;
-        string? input = "";
         bool valid = false;
-        while (!valid)
+        do
         {
             Console.Write(prompt);
-            input = Console.ReadLine();
-            valid = int.TryParse(input, out value);
-            if (!valid || value < min || value > max)
+            valid = int.TryParse(Console.ReadLine(), out value) && value >= min && value <= max;
+            if (!valid)
             {
-                valid = false;
                 Console.WriteLine($"Ошибка: введите целое число в диапазоне [{min}, {max}].");
             }
-        }
+        } while (!valid);
         return value;
     }
 
     private static decimal ReadDecimal(string prompt, decimal min = decimal.MinValue, decimal max = decimal.MaxValue)
     {
         decimal value = 0;
-        string? input = "";
         bool valid = false;
-        while (!valid)
+        do
         {
             Console.Write(prompt);
-            input = Console.ReadLine();
-            valid = decimal.TryParse(input, out value);
-            if (!valid || value < min || value > max)
-            {
-                valid = false;
+            valid = decimal.TryParse(Console.ReadLine(), out value) && value >= min && value <= max;
+            if (!valid)
                 Console.WriteLine($"Ошибка: введите число в диапазоне [{min}, {max}].");
-            }
-        }
+        } while (!valid);
         return value;
     }
 
     private static string ReadNonEmptyString(string prompt)
     {
         string? input = "";
-        while (true)
+        do
         {
             Console.Write(prompt);
-            input = Console.ReadLine();
+            input = Console.ReadLine()?.Trim();
             if (!string.IsNullOrWhiteSpace(input))
-            {
-                return input.Trim();
-            }
+                return input;
             Console.WriteLine("Ошибка: строка не может быть пустой.");
-        }
+        } while (true);
     }
 }
