@@ -66,24 +66,13 @@ internal class DatabaseHelper
             return;
         }
 
-        foreach (Exhibit e in _exhibits)
-        {
-            Console.WriteLine(e);
-        }
+        var query = from e in _exhibits select e.ToString();
+        Console.WriteLine(string.Join(Environment.NewLine, query));
     }
 
     public void AddExhibit(Exhibit exhibit)
     {
-        bool exists = false;
-        foreach (Exhibit e in _exhibits)
-        {
-            if (e.Id == exhibit.Id)
-            {
-                exists = true;
-                break;
-            }
-        }
-
+        bool exists = (from e in _exhibits where e.Id == exhibit.Id select e).Any();
         if (exists)
         {
             Console.WriteLine($"Экспонат с ID {exhibit.Id} уже существует. Добавление отменено.");
@@ -97,16 +86,7 @@ internal class DatabaseHelper
 
     public void DeleteById(int id)
     {
-        Exhibit? toRemove = null;
-        foreach (Exhibit e in _exhibits)
-        {
-            if (e.Id == id)
-            {
-                toRemove = e;
-                break;
-            }
-        }
-
+        Exhibit? toRemove = (from e in _exhibits where e.Id == id select e).FirstOrDefault();
         if (toRemove == null)
         {
             Console.WriteLine($"Экспонат с ID {id} не найден.");
@@ -120,28 +100,18 @@ internal class DatabaseHelper
 
     public List<Exhibit> GetByMaterial(string material)
     {
-        List<Exhibit> result = new List<Exhibit>();
-        foreach (Exhibit e in _exhibits)
-        {
-            if (string.Equals(e.Material, material, StringComparison.OrdinalIgnoreCase))
-            {
-                result.Add(e);
-            }
-        }
-        return result;
+        var query = from e in _exhibits
+                    where string.Equals(e.Material, material, StringComparison.OrdinalIgnoreCase)
+                    select e;
+        return query.ToList();
     }
 
     public List<Exhibit> GetByYearAfter(int year)
     {
-        List<Exhibit> result = new List<Exhibit>();
-        foreach (Exhibit e in _exhibits)
-        {
-            if (e.Year > year)
-            {
-                result.Add(e);
-            }
-        }
-        return result;
+        var query = from e in _exhibits
+                    where e.Year > year
+                    select e;
+        return query.ToList();
     }
 
     public decimal GetAverageValue()
@@ -149,34 +119,20 @@ internal class DatabaseHelper
         if (_exhibits.Count == 0)
             return 0;
 
-        decimal sum = 0;
-        foreach (Exhibit e in _exhibits)
-        {
-            sum += e.Value;
-        }
+        decimal sum = (from e in _exhibits select e.Value).Sum();
         return sum / _exhibits.Count;
     }
 
     public int GetCountByArtist(string artist)
     {
-        int count = 0;
-        foreach (Exhibit e in _exhibits)
-        {
-            if (string.Equals(e.Artist, artist, StringComparison.OrdinalIgnoreCase))
-            {
-                count++;
-            }
-        }
-        return count;
+        var query = from e in _exhibits
+                    where string.Equals(e.Artist, artist, StringComparison.OrdinalIgnoreCase)
+                    select e;
+        return query.Count();
     }
 
     public bool ExistsId(int id)
     {
-        foreach (Exhibit e in _exhibits)
-        {
-            if (e.Id == id)
-                return true;
-        }
-        return false;
+        return (from e in _exhibits where e.Id == id select e).Any();
     }
 }
